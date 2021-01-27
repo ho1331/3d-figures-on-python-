@@ -1,0 +1,46 @@
+# from IPython import get_ipython
+# ipy = get_ipython()
+# if ipy is not None:
+#     ipy.run_line_magic('matplotlib', 'inline')
+import scipy.integrate as intgr
+import numpy as np
+import matplotlib.pyplot as plt
+from sympy import *
+
+
+def f(x1,x2):
+    """Длина дуги"""
+    x = Symbol('x')
+    y = x*sqrt(x)
+    ydiff = y.diff(x)
+    z = sqrt(1+(ydiff)**2)
+    g = lambdify(x,z,"numpy")
+    I = intgr.quad(g,x1,x2)
+    return I
+
+print(f(0,1))
+
+
+def y (x):
+    """Расчет функции"""
+    return x*np.sqrt(x)
+
+x_1 = np.linspace(0, 3, 101); x_2 = np.linspace(0, 1, 101) 
+plt.plot(x_1, y(x_1), color='red', linestyle='--', linewidth=4, label='func')
+plt.plot(x_2, y(x_2), color='blue',linewidth=4, label='Длина отрезка')
+y_marker_1,y_marker_2 = r'y=$x\sqrt{x}$', \
+                        r'L=$\int_{0}^{1} \sqrt{1 + (y(x))^{2}}dx$'
+plt.text(1.8, 4, y_marker_1, fontsize=16,\
+        color='black') # выводим и позиционируем формулу
+plt.text(-0.1, 1.2, y_marker_2, fontsize=12,\
+        color='black') # выводим и позиционируем формулу
+plt.legend(loc=4) # отображаем названия label
+plt.xlabel('x'); plt.ylabel('y') # название осей
+plt.title("График функции Y")
+plt.grid()
+plt.show()
+ 
+
+# plt.scatter(1,1)
+# formula = latex(S('sqrt(1+(x*sqrt(x))**2)',evaluate=False))
+# print(formula)
