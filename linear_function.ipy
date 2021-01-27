@@ -9,7 +9,7 @@ from sympy import *
 
 
 def f(x1,x2):
-    """Длина дуги"""
+    """arc length"""
     x = Symbol('x')
     y = x*sqrt(x)
     ydiff = y.diff(x)
@@ -22,7 +22,7 @@ print(f(0,1))
 
 
 def y (x):
-    """Расчет функции"""
+    """function calculation"""
     return x*np.sqrt(x)
 
 x_1 = np.linspace(0, 3, 101); x_2 = np.linspace(0, 1, 101) 
